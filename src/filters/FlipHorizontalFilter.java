@@ -28,14 +28,15 @@ public class FlipHorizontalFilter extends AbstractFilter {
      * 
      * @param theImage The image.
      */
+    // Stella: rename fields data as NewImage and row as NewRow
     @Override
     public void filter(final PixelImage theImage) {
-        final Pixel[][] data = theImage.getPixelData();
-        for (int row = 0; row < theImage.getHeight(); row++) {
+        final Pixel[][] NewImage = theImage.getPixelData();
+        for (int NewRow = 0; NewRow < theImage.getHeight(); NewRow++) {
             for (int col = 0; col < theImage.getWidth() / 2; col++) {
-                swap(data, row, col, row, theImage.getWidth() - col - 1);
+                swapPixels(NewImage, NewRow, col, NewRow, theImage.getWidth() - col - 1);
             }
         }
-        theImage.setPixelData(data);
+        theImage.setPixelData(NewImage);
     }
 }

@@ -53,16 +53,21 @@ public class GrayscaleFilter extends AbstractFilter {
      * @param theImage The image.
      */
     @Override
-    public void filter(final PixelImage theImage) {
+   public void filter(final PixelImage theImage) {
         final int w = theImage.getWidth(null);
         final int h = theImage.getHeight(null);
         for (int i = 0; i < w; i++) {
             for (int j = 0; j < h; j++) {
-                final int p = theImage.getRGB(i, j);
+                int pindex = theImage.getRGB(i, j);
+                
+              // STELLA: pull up method for p and k and naming it into pindex and q index
+                final int p = pindex;
+              // STELLA: extracting a constant
+                int kindex = ((p >> RED_OFFSET) & MASK)
+                        + ((p >> GREEN_OFFSET) & MASK)
+                        + (p & MASK);
                 final int q =
-                        (((p >> RED_OFFSET) & MASK)
-                                + ((p >> GREEN_OFFSET) & MASK)
-                                + (p & MASK))
+                        kindex
                                 / NUM_COLORS;
                 theImage.setRGB(i, j, (MASK << ALPHA_OFFSET) | (q << RED_OFFSET)
                                        | (q << GREEN_OFFSET) | q);

@@ -13,10 +13,12 @@ package filters;
  * @version 1.1
  */
 public class EdgeHighlightFilter extends AbstractWeightedFilter {
+ //Stella: extracting a constant changing the -1 into min_int
+    private static final int MIN_INT = -1;
     /**
      * A 3x3 matrix of weights to use in the filtering algorithm.
      */
-    private static final int[][] WEIGHTS = {{-1, -1, -1}, {-1, 9, -1}, {-1, -1, -1}};
+    private static final int[][] WEIGHTS = {{MIN_INT, MIN_INT, MIN_INT}, {MIN_INT, 9, MIN_INT}, {MIN_INT, MIN_INT, MIN_INT}};
 
     /**
      * Constructs a new edge highlighting filter.

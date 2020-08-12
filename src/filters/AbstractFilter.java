@@ -35,14 +35,18 @@ public abstract class AbstractFilter implements Filter {
      * class "snapshot.filters.EdgeDetectFilter" would end up with "EdgeDetect"
      * as its description.
      */
+    //Stella rename varibles for from date to name
+    //used the extract local variable called myDescriptionIndex and myDescriptionIndex1
     protected AbstractFilter() {
         final String name = getClass().getName();
         final int dot = name.lastIndexOf('.');
         if (dot >= 0 && name.endsWith(FILTER_SUFFIX)) {
             // truncate the word "Filter"
-            myDescription = name.substring(dot + 1, name.length() - FILTER_SUFFIX.length());
+            String myDescriptionIndex = name.substring(dot + 1, name.length() - FILTER_SUFFIX.length());
+            myDescription = myDescriptionIndex;
         } else {
-            myDescription = name.substring(dot + 1, name.length());
+            String myDescriptionIdex1 = name.substring(dot + 1, name.length());
+            myDescription = myDescriptionIdex1;
         }
     }
 
@@ -105,7 +109,7 @@ public abstract class AbstractFilter implements Filter {
             sum = sum + 1;
         }
 
-        weight(theImage, theWeights, sum);
+        weightPixel(theImage, theWeights, sum);
     }
 
     /**
@@ -118,7 +122,8 @@ public abstract class AbstractFilter implements Filter {
      * @exception IllegalArgumentException if the weights are invalid.
      * @see #weight(PixelImage, int[][])
      */
-    protected void weight(final PixelImage theImage, final int[][] theWeights,
+	// change fuction declaration
+    protected void weightPixel(final PixelImage theImage, final int[][] theWeights,
                           final int theScale) throws IllegalArgumentException {
         checkWeights(theWeights);
 
@@ -145,9 +150,9 @@ public abstract class AbstractFilter implements Filter {
                 }
 
                 // account for negative / too high color values
-                red = normalize(red / theScale);
-                green = normalize(green / theScale);
-                blue = normalize(blue / theScale);
+                red = normalizeColor(red / theScale);
+                green = normalizeColor(green / theScale);
+                blue = normalizeColor(blue / theScale);
 
                 newPixels[y][x] = new Pixel(red, green, blue);
             }
@@ -178,8 +183,13 @@ public abstract class AbstractFilter implements Filter {
      * @param theColor The color value.
      * @return the normalized color value.
      */
-    protected int normalize(final int theColor) {
-        return Math.max(Pixel.MIN_COLOR_VALUE, Math.min(Pixel.MAX_COLOR_VALUE, theColor));
+	// STELLA: used inline method
+	// STELLA: change function declaration
+    protected int normalizeColor(final int theColor) {
+        protected int normalize(final int theColor) {
+        int a = Pixel.MIN_COLOR_VALUE;
+        int b = Math.min(Pixel.MAX_COLOR_VALUE, theColor);
+        return (a >= b) ? a : b;
     }
 
     /**
@@ -191,7 +201,8 @@ public abstract class AbstractFilter implements Filter {
      * @param row2 The row of the second pixel to swap.
      * @param col2 The column of the second pixel to swap.
      */
-    protected void swap(final Pixel[][] theData, final int row1, final int col1,
+	// STELLA: change function declaration
+    protected void pixelSwap(final Pixel[][] theData, final int row1, final int col1,
                         final int row2, final int col2) {
         final Pixel temp = theData[row1][col1];
         theData[row1][col1] = theData[row2][col2];
