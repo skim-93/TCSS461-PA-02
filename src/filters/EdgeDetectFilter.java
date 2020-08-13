@@ -15,14 +15,22 @@ import image.PixelImage;
  * @version 1.1
  */
 public class EdgeDetectFilter extends AbstractFilter {
-    //Stella: extracting a constant changing the -1 into min_int
+    
+	//Seungku Kim: added missing constant
+	private static final int MIN_INT = -1;
+	
+	//Seungku Kim: added constant String for constructor
+	private static final String EDGE_DETECT = "Edge Detect";
+	
+	//Stella: extracting a constant changing the -1 into min_int
     private static final int[][] WEIGHTS = {{MIN_INT, MIN_INT, MIN_INT}, {MIN_INT, 8, MIN_INT}, {MIN_INT, MIN_INT, MIN_INT}};
 
     /**
      * Constructs a new edge detection filter.
      */
     public EdgeDetectFilter() {
-        super("Edge Detect");
+    	//Seungku Kim: used final string field instead of string
+        super(EDGE_DETECT);
     }
 
     /**

@@ -177,21 +177,7 @@ public abstract class AbstractFilter implements Filter {
         }
     }
 
-    /**
-     * Normalizes the specified color value to the range 0-255.
-     * 
-     * @param theColor The color value.
-     * @return the normalized color value.
-     */
-	// STELLA: used inline method
-	// STELLA: change function declaration
-    protected int normalizeColor(final int theColor) {
-        protected int normalize(final int theColor) {
-        int a = Pixel.MIN_COLOR_VALUE;
-        int b = Math.min(Pixel.MAX_COLOR_VALUE, theColor);
-        return (a >= b) ? a : b;
-    }
-
+    //Seungku Kim: Pull up method
     /**
      * Swaps the specified pixels in the image.
      * 
@@ -208,4 +194,21 @@ public abstract class AbstractFilter implements Filter {
         theData[row1][col1] = theData[row2][col2];
         theData[row2][col2] = temp;
     }
+    
+    //Seungku Kim: Push down method
+    /**
+     * Normalizes the specified color value to the range 0-255.
+     * 
+     * @param theColor The color value.
+     * @return the normalized color value.
+     */
+	// STELLA: used inline method
+	// STELLA: change function declaration
+    protected int normalizeColor(final int theColor) {
+        protected int normalize(final int theColor) {
+        int a = Pixel.MIN_COLOR_VALUE;
+        int b = Math.min(Pixel.MAX_COLOR_VALUE, theColor);
+        return (a >= b) ? a : b;
+    }
+
 }

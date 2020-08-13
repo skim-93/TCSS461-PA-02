@@ -16,11 +16,15 @@ import image.PixelImage;
  * @version 1.1
  */
 public class FlipVerticalFilter extends AbstractFilter {
-    /**
+    
+	//Seungku Kim: added constant String for constructor
+	private static final String FLIP_VERTICAL = "Flip Vertical";
+	
+	/**
      * Constructs a new flip vertical filter.
      */
     public FlipVerticalFilter() {
-        super("Flip Vertical");
+        super(FLIP_VERTICAL);
     }
 
     /**

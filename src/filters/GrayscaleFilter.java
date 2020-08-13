@@ -15,7 +15,11 @@ import image.PixelImage;
  * @version 1.1
  */
 public class GrayscaleFilter extends AbstractFilter {
-    /**
+    
+	//Seungku Kim: added constant String for constructor
+	private static final String GRAYSCALE = "Grayscale";
+	
+	/**
      * The mask for transforming the colors to grayscale.
      */
     private static final int MASK = 0xff;
@@ -44,7 +48,7 @@ public class GrayscaleFilter extends AbstractFilter {
      * Constructs a new grayscale filter.
      */
     public GrayscaleFilter() {
-        super("Grayscale");
+        super(GRAYSCALE);
     }
 
     /**

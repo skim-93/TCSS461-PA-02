@@ -37,5 +37,10 @@ public final class SnapShopMain {
                 gui.start();    
             }
         });
+        Runnable run = () -> {final SnapShopGUI gui = new SnapShopGUI(); gui.start();};
+        
+        new Thread(run).start();
+        
+        
     }
 }

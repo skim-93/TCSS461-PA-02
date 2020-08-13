@@ -13,7 +13,11 @@ package filters;
  * @version 1.1
  */
 public class SoftenFilter extends AbstractWeightedFilter {
-    //Stella: extracting a constant changing the -1 into min_int
+    
+	//Seungku Kim: added constant String for constructor
+	private static final String SOFTEN = "Soften";
+	
+	//Stella: extracting a constant changing the -1 into min_int
     //        4 into max_int and 1 
     private static final int MIN_INT = 1;
     /**
@@ -25,7 +29,7 @@ public class SoftenFilter extends AbstractWeightedFilter {
      * Constructs a new softening filter.
      */
     public SoftenFilter() {
-        super("Soften", theWEIGTH);
+        super(SOFTEN, theWEIGTH);
     }
 
 }

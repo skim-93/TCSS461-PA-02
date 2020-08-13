@@ -13,8 +13,13 @@ package filters;
  * @version 1.1
  */
 public class EdgeHighlightFilter extends AbstractWeightedFilter {
- //Stella: extracting a constant changing the -1 into min_int
+	
+	//Seungku Kim: extracting a constant String "edge highlight" to constant
+	private static final String EDGE_HIGHLIGHT = "Edge Highlight";
+	
+	//Stella: extracting a constant changing the -1 into min_int
     private static final int MIN_INT = -1;
+    
     /**
      * A 3x3 matrix of weights to use in the filtering algorithm.
      */
@@ -24,7 +29,7 @@ public class EdgeHighlightFilter extends AbstractWeightedFilter {
      * Constructs a new edge highlighting filter.
      */
     public EdgeHighlightFilter() {
-        super("Edge Highlight", WEIGHTS);
+        super(EDGE_HIGHLIGHT, WEIGHTS);
     }
 
 }

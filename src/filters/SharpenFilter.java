@@ -13,6 +13,10 @@ package filters;
  * @version 1.1
  */
 public class SharpenFilter extends AbstractWeightedFilter {
+	
+	//Seungku Kim: added constant String for constructor
+	private static final String SHARPEN = "sharpen";
+	
     //Stella: extracting a constant changing the -1 into min_int
     private static final int MIN_INT = -1;
     /**
@@ -24,6 +28,6 @@ public class SharpenFilter extends AbstractWeightedFilter {
      * Constructs a new sharpening filter.
      */
     public SharpenFilter() {
-        super("Sharpen", WEIGHTS);
+        super(SHARPEN, WEIGHTS);
     }
 }
