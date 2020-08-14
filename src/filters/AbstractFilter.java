@@ -205,7 +205,6 @@ public abstract class AbstractFilter implements Filter {
 	// STELLA: used inline method
 	// STELLA: change function declaration
     protected int normalizeColor(final int theColor) {
-        protected int normalize(final int theColor) {
         int a = Pixel.MIN_COLOR_VALUE;
         int b = Math.min(Pixel.MAX_COLOR_VALUE, theColor);
         return (a >= b) ? a : b;
