@@ -37,7 +37,7 @@ public class FlipVerticalFilter extends AbstractFilter {
         final Pixel[][] data = theImage.getPixelData();
         for (int row = 0; row < theImage.getHeight() / 2; row++) {
             for (int col = 0; col < theImage.getWidth(); col++) {
-                pixelSwap(data, row, col, theImage.getHeight() - row - 1, col);
+                swapPixels(data, row, col, theImage.getHeight() - row - 1, col);
             }
         }
         theImage.setPixelData(data);
