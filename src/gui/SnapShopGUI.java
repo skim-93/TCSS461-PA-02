@@ -75,7 +75,8 @@ public class SnapShopGUI {
     private List<JButton> myFilterButtons;
 
     /** The file chooser. */
-    private JFileChooser myChooser;
+    // Ilya Bokov Rename Variable
+    private JFileChooser myFileChooser;
 
     /** The image. */
     private PixelImage myImage;
@@ -211,19 +212,26 @@ public class SnapShopGUI {
     }
 
     /**
+     * Ilya Bokov Slide Components
      * Sets up the graphical components.
      */
     private void doLayout() {
+    	
+        // label added directly the frame - works
+        JPanel imagePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        imagePanel.add(myImageLabel);
+        myFrame.add(imagePanel, BorderLayout.CENTER);
+    	
         // create the filter buttons
-        myFilterButtons = new ArrayList<JButton>();
-        myFilterButtons.add(createButton(new EdgeDetectFilter()));
-        myFilterButtons.add(createButton(new EdgeHighlightFilter()));
-        myFilterButtons.add(createButton(new FlipHorizontalFilter()));
-        myFilterButtons.add(createButton(new FlipVerticalFilter()));
-        myFilterButtons.add(createButton(new GrayscaleFilter()));
-        myFilterButtons.add(createButton(new SharpenFilter()));
-        myFilterButtons.add(createButton(new SoftenFilter()));
-
+//        myFilterButtons = new ArrayList<JButton>();
+//        myFilterButtons.add(createButton(new EdgeDetectFilter()));
+//        myFilterButtons.add(createButton(new EdgeHighlightFilter()));
+//        myFilterButtons.add(createButton(new FlipHorizontalFilter()));
+//        myFilterButtons.add(createButton(new FlipVerticalFilter()));
+//        myFilterButtons.add(createButton(new GrayscaleFilter()));
+//        myFilterButtons.add(createButton(new SharpenFilter()));
+//        myFilterButtons.add(createButton(new SoftenFilter()));
+    	createMyFilterButtons();
         // add them to a panel
         final JPanel westNorthPanel = new JPanel(new GridLayout(myFilterButtons.size(), 1));
         for (final JButton button : myFilterButtons) {
@@ -238,13 +246,13 @@ public class SnapShopGUI {
         westOuterPanel.add(westNorthPanel, BorderLayout.NORTH);
         
         // south panel to hold the file Open button
-        final JPanel westSouthPanel = new JPanel(new GridLayout(3, 1));
-        westSouthPanel.add(myOpenButton);
-
-        westSouthPanel.add(mySaveButton);
-
-        westSouthPanel.add(myCloseButton);
-        westOuterPanel.add(westSouthPanel, BorderLayout.SOUTH);
+//        final JPanel westSouthPanel = new JPanel(new GridLayout(3, 1));
+//        westSouthPanel.add(myOpenButton);
+//
+//        westSouthPanel.add(mySaveButton);
+//
+//        westSouthPanel.add(myCloseButton);
+        westOuterPanel.add(addWestSouthPanel(), BorderLayout.SOUTH);
 
         
         myFrame.add(westOuterPanel, BorderLayout.WEST);
@@ -253,10 +261,10 @@ public class SnapShopGUI {
 //        westOuterPanel.add(westInnerPanel);
 //        myFrame.add(westInnerPanel, BorderLayout.WEST);
 
-        // label added directly the frame - works
-        JPanel imagePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
-        imagePanel.add(myImageLabel);
-        myFrame.add(imagePanel, BorderLayout.CENTER);
+//        // label added directly the frame - works
+//        JPanel imagePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+//        imagePanel.add(myImageLabel);
+//        myFrame.add(imagePanel, BorderLayout.CENTER);
         
         // label added to panel does not work
 //        JPanel imagePanel = new JPanel();
@@ -289,6 +297,33 @@ public class SnapShopGUI {
                                           "Error!",
                                           JOptionPane.ERROR_MESSAGE);
         }
+    }
+    
+    /**
+     * Ilya Refactor Extract Method
+     */
+    public JPanel addWestSouthPanel() {
+        // south panel to hold the file Open button
+        final JPanel westSouthPanel = new JPanel(new GridLayout(3, 1));
+        westSouthPanel.add(myOpenButton);
+        westSouthPanel.add(mySaveButton);
+        westSouthPanel.add(myCloseButton);
+        return westSouthPanel;
+    }
+    
+    /**
+     * Ilya Refactor Extract Method
+     */
+    public void createMyFilterButtons() {
+        // create the filter buttons
+        myFilterButtons = new ArrayList<JButton>();
+        myFilterButtons.add(createButton(new EdgeDetectFilter()));
+        myFilterButtons.add(createButton(new EdgeHighlightFilter()));
+        myFilterButtons.add(createButton(new FlipHorizontalFilter()));
+        myFilterButtons.add(createButton(new FlipVerticalFilter()));
+        myFilterButtons.add(createButton(new GrayscaleFilter()));
+        myFilterButtons.add(createButton(new SharpenFilter()));
+        myFilterButtons.add(createButton(new SoftenFilter()));
     }
 
     /** Attempts to center the JFrame on the screen. */
@@ -339,24 +374,24 @@ public class SnapShopGUI {
         File result = null;
 
         // construct file chooser if necessary
-        if (myChooser == null) {
+        if (myFileChooser == null) {
             // my_chooser = new JFileChooser(System.getProperty(".home"));
 
 //            myChooser = new JFileChooser(".");
             
-            myChooser = new JFileChooser(".");
+            myFileChooser = new JFileChooser(".");
         }
 
         int choice;
 
         if (theOpenFlag) {
-            choice = myChooser.showOpenDialog(myFrame);
+            choice = myFileChooser.showOpenDialog(myFrame);
         } else {
-            choice = myChooser.showSaveDialog(myFrame);
+            choice = myFileChooser.showSaveDialog(myFrame);
         }
 
         if (choice == JFileChooser.APPROVE_OPTION) {
-            result = myChooser.getSelectedFile();
+            result = myFileChooser.getSelectedFile();
         }
 
         return result;

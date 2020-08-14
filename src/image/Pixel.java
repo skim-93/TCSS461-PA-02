@@ -148,4 +148,4 @@ public class Pixel {
 //            throw new IllegalArgumentException("Invalid color value: " + theValue);
 //        }
     }
-}
+

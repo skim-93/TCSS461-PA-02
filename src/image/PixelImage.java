@@ -54,16 +54,17 @@ public final class PixelImage extends BufferedImage {
      * @exception IOException if there is a problem loading the image.
      */
     public static PixelImage load(final File theFile) throws IOException {
-        final BufferedImage buf = ImageIO.read(theFile);
+    	// Ilya Bokov Rename Variable
+        final BufferedImage bufferedImage = ImageIO.read(theFile);
 
-        if (buf == null) {
+        if (bufferedImage == null) {
             throw new IOException("File did not contain a valid image: " + theFile);
         }
 
         final PixelImage image =
-                new PixelImage(buf.getWidth(), buf.getHeight(), BufferedImage.TYPE_INT_RGB);
+                new PixelImage(bufferedImage.getWidth(), bufferedImage.getHeight(), BufferedImage.TYPE_INT_RGB);
         final Graphics g = image.getGraphics();
-        g.drawImage(buf, 0, 0, null);
+        g.drawImage(bufferedImage, 0, 0, null);
         return image;
     }
 
@@ -88,18 +89,19 @@ public final class PixelImage extends BufferedImage {
      */
     public Pixel[][] getPixelData() {
         final Raster r = getRaster();
-        final Pixel[][] data = new Pixel[r.getHeight()][r.getWidth()];
+        // Ilya Bokov Rename Variable 
+        final Pixel[][] pixelData = new Pixel[r.getHeight()][r.getWidth()];
         int[] samples = new int[Pixel.NUM_CHANNELS];
 
         for (int row = 0; row < r.getHeight(); row++) {
             for (int col = 0; col < r.getWidth(); col++) {
                 samples = r.getPixel(col, row, samples);
                 final Pixel newPixel = new Pixel(samples[0], samples[1], samples[2]);
-                data[row][col] = newPixel;
+                pixelData[row][col] = newPixel;
             }
         }
 
-        return data;
+        return pixelData;
     }
 
     /**
@@ -125,13 +127,15 @@ public final class PixelImage extends BufferedImage {
                 }
             }
         }
-
+        
+        //Ilya Bokov Extract Variable 
         for (int row = 0; row < wr.getHeight(); row++) {
             for (int col = 0; col < wr.getWidth(); col++) {
-                pixelValues[0] = theData[row][col].getRed();
-                pixelValues[1] = theData[row][col].getGreen();
-                pixelValues[2] = theData[row][col].getBlue();
-                wr.setPixel(col, row, pixelValues);
+                int[] pixelValues2 = pixelValues;
+				pixelValues2[0] = theData[row][col].getRed();
+                pixelValues2[1] = theData[row][col].getGreen();
+                pixelValues2[2] = theData[row][col].getBlue();
+                wr.setPixel(col, row, pixelValues2);
             }
         }
     }
