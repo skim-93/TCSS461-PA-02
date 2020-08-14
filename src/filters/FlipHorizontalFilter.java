@@ -38,7 +38,7 @@ public class FlipHorizontalFilter extends AbstractFilter {
         final Pixel[][] NewImage = theImage.getPixelData();
         for (int NewRow = 0; NewRow < theImage.getHeight(); NewRow++) {
             for (int col = 0; col < theImage.getWidth() / 2; col++) {
-                swapPixels(NewImage, NewRow, col, NewRow, theImage.getWidth() - col - 1);
+                pixelSwap(NewImage, NewRow, col, NewRow, theImage.getWidth() - col - 1);
             }
         }
         theImage.setPixelData(NewImage);
