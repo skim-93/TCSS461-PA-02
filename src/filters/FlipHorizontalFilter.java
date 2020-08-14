@@ -18,9 +18,9 @@ import image.PixelImage;
 public class FlipHorizontalFilter extends AbstractFilter {
     
 	//Seungku Kim: added constant String for constructor
-	private static final String FLIP_HORIZONTAL = "Flip Horizontal";
-	
-	/**
+    private static final String FLIP_HORIZONTAL = "Flip Horizontal";
+    
+    /**
      * Constructs a new flip horizontal filter.
      */
     public FlipHorizontalFilter() {

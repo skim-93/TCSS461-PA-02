@@ -188,7 +188,7 @@ public abstract class AbstractFilter implements Filter {
      * @param col2 The column of the second pixel to swap.
      */
 	// STELLA: change function declaration
-    protected void pixelSwap(final Pixel[][] theData, final int row1, final int col1,
+    protected void swapPixels(final Pixel[][] theData, final int row1, final int col1,
                         final int row2, final int col2) {
         final Pixel temp = theData[row1][col1];
         theData[row1][col1] = theData[row2][col2];
